@@ -184,9 +184,9 @@
                                 <span class="price-value">R$ 97,00</span>
                                 <span class="price-period">/mês</span>
                             </div>
-                            <button class="btn-ai" id="openCheckout">Adquirir Agora</button>
+                            <button class="btn-ai" id="openCheckoutMarsha">Adquirir Agora</button>
                         </div>
-                        <p class="ai-note">* O agente de IA é um complemento ao atendimento profissional e não substitui a terapia tradicional.</p>
+                        <p class="ai-note">* A Marsha é um complemento ao atendimento profissional e não substitui a terapia tradicional.</p>
                     </div>
                     <div class="ai-visual">
                         <div class="ai-card">
@@ -312,8 +312,117 @@
         </svg>
     </button>
 
-    <!-- Modal de Checkout -->
-    <div id="checkoutModal" class="modal">
+    <!-- Modal de Checkout Marsha -->
+    <div id="checkoutModalMarsha" class="modal">
+        <div class="modal-content">
+            <span class="close-modal-marsha">&times;</span>
+            <div class="checkout-header">
+                <h2>Assinar Marsha</h2>
+                <p>Sua Assistente de Bem-Estar 24/7</p>
+            </div>
+            <div class="checkout-body">
+                <div class="product-summary">
+                    <div class="product-info">
+                        <span class="product-icon">💬</span>
+                        <div>
+                            <h3>Marsha - Assinatura Mensal</h3>
+                            <p>Acesso ilimitado 24/7</p>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <span class="price">R$ 97,00</span>
+                        <span class="period">/mês</span>
+                    </div>
+                </div>
+
+                <form id="checkoutFormMarsha" class="checkout-form">
+                    <h3>Seus Dados</h3>
+                    
+                    <div class="form-group">
+                        <label for="nomeMarsha">Nome Completo *</label>
+                        <input type="text" id="nomeMarsha" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailMarsha">E-mail *</label>
+                        <input type="email" id="emailMarsha" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefoneMarsha">WhatsApp *</label>
+                        <input type="tel" id="telefoneMarsha" name="telefone" placeholder="(00) 00000-0000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpfMarsha">CPF *</label>
+                        <input type="text" id="cpfMarsha" name="cpf" placeholder="000.000.000-00" required>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="termosMarsha" required>
+                            <span>Aceito os termos de uso e política de privacidade *</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-submit btn-mercadopago">
+                        <span>Pagar com Mercado Pago</span>
+                        <span class="mp-icon">💳</span>
+                    </button>
+
+                    <div class="payment-methods">
+                        <p>Aceitamos:</p>
+                        <div class="methods-icons">
+                            <span>💳 Cartão</span>
+                            <span>📱 PIX</span>
+                            <span>📄 Boleto</span>
+                        </div>
+                    </div>
+
+                    <p class="checkout-note">Após a confirmação do pagamento, você receberá suas credenciais de acesso em até 24 horas por email.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="confirmation-content">
+                <div class="success-icon">✓</div>
+                <h2>Pagamento Confirmado!</h2>
+                <p class="success-message">Obrigado pela sua assinatura da Marsha!</p>
+                
+                <div class="next-steps">
+                    <h3>Próximos Passos:</h3>
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <p>Você receberá um email de confirmação em breve</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <p>Nossa equipe criará seu acesso personalizado</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <p>Em até 24 horas, você receberá suas credenciais por email e WhatsApp</p>
+                    </div>
+                </div>
+
+                <div class="contact-support">
+                    <p>Dúvidas? Entre em contato:</p>
+                    <a href="https://wa.me/5519991309355" class="btn-whatsapp-support">
+                        📱 Falar com Suporte
+                    </a>
+                </div>
+
+                <button class="btn-close-confirmation">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout Original -->
+    <div id="checkoutModal" class="modal"></div>
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <div class="checkout-header">

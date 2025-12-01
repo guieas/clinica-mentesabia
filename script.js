@@ -45,7 +45,114 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Modal de Checkout
+// Modal de Checkout Marsha
+const modalMarsha = document.getElementById('checkoutModalMarsha');
+const openCheckoutMarshaBtn = document.getElementById('openCheckoutMarsha');
+const closeModalMarsha = document.querySelector('.close-modal-marsha');
+const confirmationModal = document.getElementById('confirmationModal');
+
+// Abrir modal Marsha
+if (openCheckoutMarshaBtn) {
+    openCheckoutMarshaBtn.addEventListener('click', () => {
+        modalMarsha.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+}
+
+// Fechar modal Marsha
+if (closeModalMarsha) {
+    closeModalMarsha.addEventListener('click', () => {
+        modalMarsha.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+}
+
+// Fechar ao clicar fora
+window.addEventListener('click', (e) => {
+    if (e.target === modalMarsha) {
+        modalMarsha.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    if (e.target === confirmationModal) {
+        confirmationModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Máscaras de input Marsha
+const telefoneMarsha = document.getElementById('telefoneMarsha');
+const cpfMarsha = document.getElementById('cpfMarsha');
+
+if (telefoneMarsha) {
+    telefoneMarsha.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length <= 11) {
+            value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            e.target.value = value;
+        }
+    });
+}
+
+if (cpfMarsha) {
+    cpfMarsha.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length <= 11) {
+            value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+            e.target.value = value;
+        }
+    });
+}
+
+// Processar pagamento Marsha (SIMULADO)
+const checkoutFormMarsha = document.getElementById('checkoutFormMarsha');
+if (checkoutFormMarsha) {
+    checkoutFormMarsha.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const nome = document.getElementById('nomeMarsha').value;
+        const email = document.getElementById('emailMarsha').value;
+        const telefone = document.getElementById('telefoneMarsha').value;
+        const cpf = document.getElementById('cpfMarsha').value;
+        
+        // SIMULAÇÃO: Em produção, aqui vai a integração real com Mercado Pago
+        // Por enquanto, simula um pagamento bem-sucedido
+        
+        console.log('Dados do cliente:', { nome, email, telefone, cpf });
+        
+        // Simula processamento
+        const btnSubmit = checkoutFormMarsha.querySelector('.btn-submit');
+        btnSubmit.textContent = 'Processando pagamento...';
+        btnSubmit.disabled = true;
+        
+        setTimeout(() => {
+            // Fecha modal de checkout
+            modalMarsha.style.display = 'none';
+            
+            // Abre modal de confirmação
+            confirmationModal.style.display = 'block';
+            
+            // Reset form
+            checkoutFormMarsha.reset();
+            btnSubmit.innerHTML = '<span>Pagar com Mercado Pago</span><span class="mp-icon">💳</span>';
+            btnSubmit.disabled = false;
+            
+            // TODO: Aqui você vai adicionar o código para enviar email para a secretária
+            // com os dados do cliente para criar o acesso no Amazon QuickSight
+            
+        }, 2000);
+    });
+}
+
+// Fechar modal de confirmação
+const btnCloseConfirmation = document.querySelector('.btn-close-confirmation');
+if (btnCloseConfirmation) {
+    btnCloseConfirmation.addEventListener('click', () => {
+        confirmationModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+}
+
+// Modal de Checkout Original
 const modal = document.getElementById('checkoutModal');
 const openCheckoutBtn = document.getElementById('openCheckout');
 const closeModal = document.querySelector('.close-modal');

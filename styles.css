@@ -1233,6 +1233,171 @@ nav .container {
     font-style: italic;
 }
 
+.btn-mercadopago {
+    background: #009ee3;
+}
+
+.btn-mercadopago:hover {
+    background: #0084c2;
+}
+
+.payment-methods {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.payment-methods p {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin-bottom: 0.5rem;
+}
+
+.methods-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.methods-icons span {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    background: var(--light-bg);
+    border-radius: 20px;
+}
+
+/* Modal de Confirmação */
+.confirmation-content {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: #10b981;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    margin: 0 auto 2rem;
+    animation: successPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes successPop {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.confirmation-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.success-message {
+    font-size: 1.2rem;
+    color: var(--light-text);
+    margin-bottom: 3rem;
+}
+
+.next-steps {
+    background: var(--light-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.next-steps h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.step {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    width: 35px;
+    height: 35px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step p {
+    flex: 1;
+    line-height: 1.8;
+    padding-top: 0.3rem;
+}
+
+.contact-support {
+    margin: 2rem 0;
+}
+
+.contact-support p {
+    margin-bottom: 1rem;
+    color: var(--light-text);
+}
+
+.btn-whatsapp-support {
+    display: inline-block;
+    background: #25d366;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-whatsapp-support:hover {
+    background: #20ba5a;
+    transform: translateY(-2px);
+}
+
+.btn-close-confirmation {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-close-confirmation:hover {
+    background: var(--gold);
+    transform: translateY(-2px);
+}
+
 /* WhatsApp Flutuante */
 .whatsapp-float {
     position: fixed;

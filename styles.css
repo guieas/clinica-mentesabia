@@ -718,21 +718,101 @@ nav .container {
 }
 
 .chat-anim-1 {
-    animation: messageAppear 0.5s ease 0.5s forwards;
+    animation: messageAppear1 0.5s ease 0.5s forwards, messageDisappear1 0.5s ease 8s forwards, messageLoop1 9s ease 9s infinite;
 }
 
 .chat-anim-2 {
-    animation: messageAppear 0.5s ease 3.5s forwards;
+    animation: messageAppear2 0.5s ease 3.5s forwards, messageDisappear2 0.5s ease 8s forwards, messageLoop2 9s ease 9s infinite;
 }
 
 .chat-anim-3 {
-    animation: messageAppear 0.5s ease 6s forwards;
+    animation: messageAppear3 0.5s ease 6s forwards, messageDisappear3 0.5s ease 8s forwards, messageLoop3 9s ease 9s infinite;
 }
 
-@keyframes messageAppear {
+@keyframes messageAppear1 {
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes messageAppear2 {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes messageAppear3 {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes messageDisappear1 {
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+}
+
+@keyframes messageDisappear2 {
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+}
+
+@keyframes messageDisappear3 {
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+}
+
+@keyframes messageLoop1 {
+    0%, 5% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    10%, 85% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    90%, 100% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+}
+
+@keyframes messageLoop2 {
+    0%, 35% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    40%, 85% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    90%, 100% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+}
+
+@keyframes messageLoop3 {
+    0%, 65% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    70%, 85% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    90%, 100% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
     }
 }
 
@@ -749,21 +829,57 @@ nav .container {
 }
 
 .typing-anim-1 {
-    animation: typingShow 0.3s ease 2.5s forwards, typingHide 0.3s ease 3.3s forwards;
+    animation: typingShow1 0.3s ease 2.5s forwards, typingHide1 0.3s ease 3.3s forwards, typingLoop1 9s ease 9s infinite;
 }
 
 .typing-anim-2 {
-    animation: typingShow 0.3s ease 5s forwards, typingHide 0.3s ease 5.8s forwards;
+    animation: typingShow2 0.3s ease 5s forwards, typingHide2 0.3s ease 5.8s forwards, typingLoop2 9s ease 9s infinite;
 }
 
-@keyframes typingShow {
+@keyframes typingShow1 {
     to {
         opacity: 1;
     }
 }
 
-@keyframes typingHide {
+@keyframes typingHide1 {
     to {
+        opacity: 0;
+    }
+}
+
+@keyframes typingShow2 {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes typingHide2 {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes typingLoop1 {
+    0%, 25% {
+        opacity: 0;
+    }
+    30%, 35% {
+        opacity: 1;
+    }
+    40%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes typingLoop2 {
+    0%, 55% {
+        opacity: 0;
+    }
+    60%, 65% {
+        opacity: 1;
+    }
+    70%, 100% {
         opacity: 0;
     }
 }

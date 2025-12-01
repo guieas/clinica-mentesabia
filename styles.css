@@ -71,19 +71,10 @@ nav .container {
 
 .hero-logo {
     margin-bottom: 3rem;
-    animation: fadeInUp 1s ease, floatLogo 6s ease-in-out infinite;
+    animation: fadeInUp 1s ease;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@keyframes floatLogo {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
 }
 
 .hero-logo img {
@@ -156,16 +147,6 @@ nav .container {
     text-align: center;
     position: relative;
     overflow: hidden;
-    animation: gradientShift 15s ease infinite;
-}
-
-@keyframes gradientShift {
-    0%, 100% {
-        background: linear-gradient(135deg, #2d2e3a 0%, #38394F 50%, #38394F 100%);
-    }
-    50% {
-        background: linear-gradient(135deg, #38394F 0%, #2d2e3a 50%, #38394F 100%);
-    }
 }
 
 
@@ -290,68 +271,6 @@ nav .container {
     font-size: 0.8rem;
     background: var(--white);
     padding: 0 10px;
-}
-
-/* Trust Badges */
-.trust-badges {
-    padding: 4rem 0;
-    background: var(--white);
-}
-
-.badges-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.badge-item {
-    text-align: center;
-    padding: 2rem 1rem;
-    transition: transform 0.3s ease;
-}
-
-.badge-item:hover {
-    transform: translateY(-5px);
-}
-
-.badge-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--gold));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    animation: pulse 3s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 0 20px rgba(212, 175, 55, 0);
-    }
-}
-
-.badge-icon svg {
-    width: 35px;
-    height: 35px;
-}
-
-.badge-item h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.badge-item p {
-    color: var(--light-text);
-    font-size: 0.95rem;
 }
 
 /* About Section */

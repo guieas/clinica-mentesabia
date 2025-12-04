@@ -1,3 +1,84 @@
+// Botão Marsha - Quero saber primeiro
+const btnMarshaNotify = document.querySelector('.btn-marsha-notify');
+if (btnMarshaNotify) {
+    btnMarshaNotify.addEventListener('click', () => {
+        const numeroWhatsApp = '5519991309355';
+        const mensagem = 'Olá! Gostaria de saber quando a Marsha for lançada.';
+        const mensagemEncoded = encodeURIComponent(mensagem);
+        const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemEncoded}`;
+        window.open(urlWhatsApp, '_blank');
+    });
+}
+
+// Interação dos Cards de Serviços com Modal
+const serviceModal = document.getElementById('serviceModal');
+const closeServiceModal = document.querySelector('.close-service-modal');
+const modalServiceIcon = document.getElementById('modalServiceIcon');
+const modalServiceTitle = document.getElementById('modalServiceTitle');
+const modalServiceDescription = document.getElementById('modalServiceDescription');
+
+const servicesData = {
+    0: {
+        title: 'Terapia Individual',
+        description: 'A terapia individual pode ser feita conosco, Andrezza ou Michele, ou também com profissionais da nossa equipe. Ao selecionar nossos terapeutas parceiros buscamos ser criteriosas para dar conta de uma ampla gama de necessidades e preferências dos clientes. Temos terapeutas homens, mulheres, mais jovens, com mais experiência, assim como terapeutas com afinidade e experiência em áreas específicas, como transtornos alimentares, transtorno da personalidade borderline, ansiedade e depressão, atendimento para adultos e crianças.'
+    },
+    1: {
+        title: 'Treinamento de Habilidades em DBT',
+        description: 'Programa estruturado para desenvolver habilidades de atenção plena, regulação emocional, tolerância ao mal-estar e efetividade interpessoal. Indicado para quem busca mais estabilidade e clareza no dia a dia.'
+    },
+    2: {
+        title: 'Treinamento para Comer Emocional e Compulsivo',
+        description: 'Ciclo de encontros focado em compreender o comer impulsivo e construir uma relação mais consciente, funcional e compassiva com a comida. Baseado em DBT e em estratégias comportamentais práticas.'
+    },
+    3: {
+        title: 'Supervisão de Casos para Profissionais',
+        description: 'Espaço de estudo, reflexão e aprofundamento clínico voltado a profissionais da saúde mental. A supervisão é guiada pela Análise do Comportamento e pelas Terapias Contextuais, com foco na qualificação técnica e no fortalecimento do raciocínio clínico.'
+    },
+    4: {
+        title: 'Atendimento Psiquiátrico',
+        description: 'Avaliação, diagnóstico e acompanhamento medicamentoso conduzidos por profissionais de psiquiatria que integram seu trabalho ao cuidado psicológico, garantindo um tratamento alinhado, responsável e individualizado.'
+    },
+    5: {
+        title: 'Atendimento Nutricional',
+        description: 'Atendimento voltado à relação com a alimentação, ao comportamento alimentar e ao cuidado com o corpo de forma compassiva, não restritiva e apoiada em ciência. Ideal para quem busca orientação nutricional alinhada à saúde emocional.'
+    }
+};
+
+document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const serviceId = this.getAttribute('data-service');
+        const serviceData = servicesData[serviceId];
+        
+        // Pega o ícone do card
+        const iconSvg = this.querySelector('.service-icon').innerHTML;
+        
+        // Preenche o modal
+        modalServiceIcon.innerHTML = iconSvg;
+        modalServiceTitle.textContent = serviceData.title;
+        modalServiceDescription.textContent = serviceData.description;
+        
+        // Abre o modal
+        serviceModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+// Fechar modal de serviço
+if (closeServiceModal) {
+    closeServiceModal.addEventListener('click', () => {
+        serviceModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+}
+
+// Fechar ao clicar fora do modal de serviço
+window.addEventListener('click', (e) => {
+    if (e.target === serviceModal) {
+        serviceModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
 // Botão Voltar ao Topo
 const scrollToTopBtn = document.getElementById('scrollToTop');
 

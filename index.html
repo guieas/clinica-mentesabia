@@ -39,7 +39,7 @@
                     <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#servicos">Serviços</a></li>
                     <li><a href="#equipe">Equipe</a></li>
-                    <li><a href="#ia">Marsha</a></li>
+                    <li><a href="#ia" class="nav-ai">Marsha (IA)</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
                 <button class="menu-toggle" aria-label="Menu">
@@ -59,7 +59,7 @@
                     <img src="images/logo.png" alt="MS Psicologia">
                 </div>
                 <h2>Cuidando da sua saúde mental com profissionalismo e acolhimento</h2>
-                <p>Atendimento psicológico especializado e humanizado</p>
+                <p>Atendimento multidisciplinar especializado e humanizado</p>
                 <a href="https://wa.me/5519991309355?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta." target="_blank" class="btn-primary">Agende sua consulta</a>
             </div>
         </section>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>Oferecemos atendimento psicológico de qualidade, com foco no bem-estar emocional e mental dos nossos pacientes. Nossa missão é proporcionar um espaço seguro e acolhedor, onde você possa trabalhar suas questões emocionais com profissionais qualificados e experientes.</p>
+                        <p>Oferecemos atendimento multidisciplinar de qualidade, com foco no bem-estar emocional e mental dos nossos pacientes. Nossa missão é proporcionar um espaço seguro e acolhedor, onde você possa trabalhar suas questões emocionais com profissionais qualificados e experientes.</p>
                         <p>Ao nos procurar, você irá preencher um formulário contando brevemente suas expectativas e necessidades, e faremos uma triagem para selecionar o melhor profissional para o seu caso.</p>
                         <p class="highlight">Nosso objetivo é fazer com que você tenha a melhor experiência terapêutica possível. E a escolha do profissional faz toda a diferença.</p>
                     </div>
@@ -83,38 +83,185 @@
         <section id="servicos" class="services">
             <div class="container">
                 <div class="section-header">
-                    <h2>Terapia Individual</h2>
+                    <h2>Nossos Serviços</h2>
                     <div class="divider"></div>
+                    <p class="section-subtitle">Clique em cada serviço para saber mais</p>
                 </div>
-                <div class="services-content-text">
-                    <p>A terapia individual pode ser feita conosco, Andrezza ou Michele, ou também com profissionais da nossa equipe.</p>
-                    <p>Ao selecionar nossos terapeutas parceiros <strong>buscamos ser criteriosas</strong> para dar conta de uma <strong>ampla gama de necessidades e preferências dos clientes.</strong></p>
-                    <p>Temos terapeutas homens, mulheres, mais jovens, com mais experiência, assim como terapeutas com afinidade e experiência em áreas específicas, como:</p>
-                    <ul class="services-list">
-                        <li>Transtornos alimentares</li>
-                        <li>Transtorno da personalidade borderline</li>
-                        <li>Ansiedade e depressão</li>
-                        <li>Atendimento para adultos e crianças</li>
-                    </ul>
+                <div class="services-grid">
+                    <div class="service-card" data-service="0">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M20 80 Q10 50 20 20 L80 20 Q90 50 80 80 Z" fill="currentColor" opacity="0.1"/>
+                                <circle cx="50" cy="42" r="18" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M42 42 Q46 38 50 42 Q54 38 58 42" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <circle cx="44" cy="38" r="2" fill="currentColor"/>
+                                <circle cx="56" cy="38" r="2" fill="currentColor"/>
+                                <path d="M35 60 L50 70 L65 60" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Terapia Individual</h3>
+                        <span class="service-badge hybrid">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            Presencial & Online
+                        </span>
+                    </div>
+
+                    <div class="service-card" data-service="1">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M20 80 Q10 50 20 20 L80 20 Q90 50 80 80 Z" fill="currentColor" opacity="0.1"/>
+                                <circle cx="50" cy="45" r="20" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M50 35 L50 45 L55 50" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                <circle cx="35" cy="55" r="3" fill="currentColor"/>
+                                <circle cx="50" cy="60" r="3" fill="currentColor"/>
+                                <circle cx="65" cy="55" r="3" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Treinamento de Habilidades em DBT</h3>
+                        <span class="service-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            Online
+                        </span>
+                    </div>
+
+                    <div class="service-card" data-service="2">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M20 80 Q10 50 20 20 L80 20 Q90 50 80 80 Z" fill="currentColor" opacity="0.1"/>
+                                <circle cx="50" cy="40" r="15" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M40 40 Q45 35 50 40 Q55 35 60 40" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M35 55 Q50 65 65 55" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Treinamento para Comer Emocional</h3>
+                        <span class="service-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            Online
+                        </span>
+                    </div>
+
+                    <div class="service-card" data-service="3">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M20 80 Q10 50 20 20 L80 20 Q90 50 80 80 Z" fill="currentColor" opacity="0.1"/>
+                                <rect x="35" y="30" width="30" height="35" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <line x1="40" y1="40" x2="60" y2="40" stroke="currentColor" stroke-width="2"/>
+                                <line x1="40" y1="48" x2="60" y2="48" stroke="currentColor" stroke-width="2"/>
+                                <line x1="40" y1="56" x2="55" y2="56" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="65" cy="35" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M65 30 L65 35 L68 38" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </div>
+                        <h3>Supervisão de Casos</h3>
+                        <span class="service-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            Online
+                        </span>
+                    </div>
+
+                    <div class="service-card" data-service="4">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M20 80 Q10 50 20 20 L80 20 Q90 50 80 80 Z" fill="currentColor" opacity="0.1"/>
+                                <rect x="38" y="30" width="24" height="30" rx="12" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <line x1="50" y1="35" x2="50" y2="45" stroke="currentColor" stroke-width="2"/>
+                                <line x1="45" y1="40" x2="55" y2="40" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="45" cy="52" r="2" fill="currentColor"/>
+                                <circle cx="55" cy="52" r="2" fill="currentColor"/>
+                                <circle cx="50" cy="52" r="2" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Atendimento Psiquiátrico</h3>
+                        <span class="service-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            Online
+                        </span>
+                    </div>
+
+                    <div class="service-card" data-service="5">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M20 80 Q10 50 20 20 L80 20 Q90 50 80 80 Z" fill="currentColor" opacity="0.1"/>
+                                <circle cx="50" cy="38" r="12" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M42 38 L48 44 L58 34" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M38 52 Q50 58 62 52" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <circle cx="40" cy="60" r="2" fill="currentColor"/>
+                                <circle cx="50" cy="62" r="2" fill="currentColor"/>
+                                <circle cx="60" cy="60" r="2" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Atendimento Nutricional</h3>
+                        <span class="service-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            Online
+                        </span>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Modal de Serviços -->
+        <div id="serviceModal" class="modal">
+            <div class="modal-content service-modal-content">
+                <span class="close-service-modal">&times;</span>
+                <div class="service-modal-body">
+                    <div class="service-modal-icon" id="modalServiceIcon"></div>
+                    <h2 id="modalServiceTitle"></h2>
+                    <div class="service-modal-divider"></div>
+                    <p id="modalServiceDescription"></p>
+                </div>
+            </div>
+        </div>
             </div>
         </section>
 
         <section id="equipe" class="team">
             <div class="container">
                 <div class="section-header">
-                    <h2>Nossa Equipe</h2>
+                    <h2>Quem Somos</h2>
                     <div class="divider"></div>
                 </div>
-                <div class="team-content">
-                    <div class="team-image">
-                        <img src="images/equipe.jpeg" alt="Andrezza e Michele - Psicólogas">
+                
+                <div class="founders-section">
+                    <h3 class="founders-title">Idealizadoras e Diretoras Clínicas</h3>
+                    <div class="team-content">
+                        <div class="team-image">
+                            <img src="images/equipe.jpeg" alt="Michele Cassiano e Andrezza Erler - Idealizadoras">
+                        </div>
+                        <div class="team-text">
+                            <p>A Mente Sábia Psicologia foi idealizada por <strong>Michele Cassiano</strong> e <strong>Andrezza Erler</strong>, sócias e diretoras clínicas que unem experiência, técnica e humanidade para conduzir a prática da nossa equipe.</p>
+                        </div>
                     </div>
-                    <div class="team-text">
-                        <h3>Profissionais Qualificadas</h3>
-                        <p>Nossa equipe é formada por psicólogas experientes e dedicadas ao cuidado da saúde mental. Andrezza e Michele lideram a clínica com profissionalismo e empatia, oferecendo um atendimento humanizado e personalizado.</p>
-                        <p>Trabalhamos com uma rede de terapeutas parceiros cuidadosamente selecionados, garantindo que cada paciente encontre o profissional ideal para suas necessidades específicas.</p>
-                    </div>
+                </div>
+                
+                <div class="team-info">
+                    <h3>Nossa Equipe</h3>
+                    <p>Nossa equipe é composta por psicólogos, psiquiatras e nutricionistas especializados em Análise do Comportamento e terapias contextuais, selecionados com rigor técnico e humano.</p>
+                    <p>Trabalhamos de forma integrada, garantindo que cada paciente seja acolhido pelo profissional mais adequado ao seu momento e às suas necessidades específicas.</p>
+                    <p class="team-highlight">Aqui, cada cuidado é pensado com atenção, ciência e presença.</p>
                 </div>
             </div>
         </section>
@@ -124,69 +271,20 @@
                 <div class="section-header">
                     <h2>Conheça a Marsha</h2>
                     <div class="divider"></div>
+                    <p class="section-subtitle-marsha">Sua mentora digital de habilidades DBT</p>
                 </div>
                 <div class="ai-content">
                     <div class="ai-text">
-                        <h3>Sua Assistente de Bem-Estar 24/7</h3>
-                        <p>Marsha é nossa assistente de inteligência artificial desenvolvida especialmente para oferecer suporte emocional e orientação psicológica a qualquer momento do dia.</p>
-                        <div class="ai-features">
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4>Atendimento Inteligente</h4>
-                                    <p>Tecnologia Amazon QuickSight para respostas precisas e empáticas</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <polyline points="12 6 12 12 16 14"></polyline>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4>Disponível 24/7</h4>
-                                    <p>Acesso ilimitado a qualquer hora, em qualquer lugar</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4>Privacidade Garantida</h4>
-                                    <p>Suas conversas são confidenciais e seguras</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4>Orientação Personalizada</h4>
-                                    <p>Respostas adaptadas às suas necessidades específicas</p>
-                                </div>
-                            </div>
+                        <div class="marsha-intro">
+                            <p>Estamos criando a <strong>Marsha</strong>, uma IA cuidadosamente treinada pela equipe da Mente Sábia para ensinar habilidades de DBT de forma acessível, ética e prática.</p>
+                            <p>Uma ferramenta que orienta, explica e ajuda você a aplicar habilidades no dia a dia — sempre com clareza, segurança e responsabilidade clínica.</p>
                         </div>
-                        <div class="ai-pricing">
-                            <div class="price-tag">
-                                <span class="price-label">Investimento</span>
-                                <span class="price-value">R$ 97,00</span>
-                                <span class="price-period">/mês</span>
-                            </div>
-                            <button class="btn-ai" id="openCheckoutMarsha">Adquirir Agora</button>
+                        
+                        <div class="marsha-cta">
+                            <h3>Inscreva-se para saber quando for lançada.</h3>
+                            <button class="btn-marsha-notify"><span>Quero saber primeiro</span></button>
+                            <p class="marsha-disclaimer">* A Marsha é um recurso complementar. Ela não substitui psicoterapia individual, nem um Treinamento de Habilidades em DBT.</p>
                         </div>
-                        <p class="ai-note">* A Marsha é um complemento ao atendimento profissional e não substitui a terapia tradicional.</p>
                     </div>
                     <div class="ai-visual">
                         <div class="ai-card">
@@ -201,12 +299,12 @@
                                 </div>
                                 <div>
                                     <h4>Marsha</h4>
-                                    <span class="status-online">● Online</span>
+                                    <span class="status-online">● Em desenvolvimento</span>
                                 </div>
                             </div>
                             <div class="ai-card-body">
                                 <div class="chat-bubble bot chat-anim-1">
-                                    <p>Olá! Sou a Marsha, sua assistente de bem-estar. Como posso te ajudar hoje?</p>
+                                    <p>Olá! Sou a Marsha. Como posso te ajudar hoje?</p>
                                 </div>
                                 <div class="typing-indicator typing-anim-1">
                                     <span></span>
@@ -214,7 +312,7 @@
                                     <span></span>
                                 </div>
                                 <div class="chat-bubble user chat-anim-2">
-                                    <p>Estou me sentindo ansioso...</p>
+                                    <p>Estou com dificuldade de dizer não para a minha amiga</p>
                                 </div>
                                 <div class="typing-indicator typing-anim-2">
                                     <span></span>
@@ -222,7 +320,7 @@
                                     <span></span>
                                 </div>
                                 <div class="chat-bubble bot chat-anim-3">
-                                    <p>Entendo. A ansiedade é uma resposta natural. Vamos trabalhar juntos algumas técnicas de respiração.</p>
+                                    <p>Entendo que isso pode ser difícil. Que tal praticar a habilidade DEAR MAN? Ela ajuda a comunicar suas necessidades de forma clara e respeitosa.</p>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +345,7 @@
                             </div>
                             <div>
                                 <h3>Endereço</h3>
-                                <p>Rua Exemplo, 123 - Centro<br>Cidade - Estado, CEP 00000-000</p>
+                                <p>Campinas - SP</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -282,7 +380,7 @@
                             </div>
                             <div>
                                 <h3>Horário de Atendimento</h3>
-                                <p>Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
+                                <p>Segunda a Sexta: 8h às 21h</p>
                             </div>
                         </div>
                     </div>
@@ -293,8 +391,19 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Mente Sábia Psicologia. Todos os direitos reservados.</p>
-            <p>Atendimento psicológico especializado</p>
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2025 Mente Sábia Psicologia. Todos os direitos reservados.</p>
+                    <p>Atendimento multidisciplinar especializado</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/mentesabia.psicologia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Mente Sábia" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 

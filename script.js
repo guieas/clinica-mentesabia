@@ -20,7 +20,7 @@ const modalServiceDescription = document.getElementById('modalServiceDescription
 const servicesData = {
     0: {
         title: 'Terapia Individual',
-        description: 'A terapia individual pode ser feita conosco, Andrezza ou Michele, ou também com profissionais da nossa equipe. Ao selecionar nossos terapeutas parceiros buscamos ser criteriosas para dar conta de uma ampla gama de necessidades e preferências dos clientes. Temos terapeutas homens, mulheres, mais jovens, com mais experiência, assim como terapeutas com afinidade e experiência em áreas específicas, como transtornos alimentares, transtorno da personalidade borderline, ansiedade e depressão, atendimento para adultos e crianças.'
+        description: 'A terapia individual pode ser feita conosco, Andrezza ou Michele, ou também com profissionais da nossa equipe. Ao selecionar nossos terapeutas buscamos ser criteriosas para dar conta de uma ampla gama de necessidades e preferências dos clientes. Temos terapeutas homens, mulheres, mais jovens, com mais experiência, assim como terapeutas com afinidade e experiência em áreas específicas, como: ansiedade e depressão, dificuldades emocionais & regulação das emoções (DBT), relacionamentos e conflitos conjugais, transtornos alimentares & relação com a comida, estresse, sobrecarga e burnout, terapia para adultos e terapia para crianças e adolescentes.'
     },
     1: {
         title: 'Treinamento de Habilidades em DBT',

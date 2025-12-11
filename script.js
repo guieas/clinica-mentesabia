@@ -322,3 +322,237 @@ Aguardo instruções para pagamento!
         alert('Pedido enviado! Você será redirecionado para o WhatsApp.');
     }, 500);
 });
+
+// Código dos Lançamentos - Executar após carregamento da página
+window.addEventListener('load', function() {
+    
+    // Dados dos lançamentos
+    const launchesData = {
+    dbt: {
+        title: 'Treinamento de Habilidades em DBT',
+        subtitle: 'Próxima turma: Março 2025',
+        price: 497,
+        installments: 3,
+        installmentValue: 165.67,
+        pixDiscount: 447, // 10% desconto
+        duration: '8 semanas',
+        maxParticipants: 12,
+        icon: '🧠'
+    },
+    eating: {
+        title: 'Treinamento para Comer Emocional',
+        subtitle: 'Próxima turma: Abril 2025',
+        price: 397,
+        installments: 3,
+        installmentValue: 132.33,
+        pixDiscount: 357, // 10% desconto
+        duration: '6 semanas',
+        maxParticipants: 10,
+        icon: '🍎'
+    }
+};
+
+    // Abrir modal de interesse
+    const launchButtons = document.querySelectorAll('.btn-launch-interest');
+    
+    if (launchButtons.length === 0) {
+        console.error('Nenhum botão .btn-launch-interest encontrado');
+    }
+    
+    launchButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Botão clicado! Abrindo modal...');
+            
+            const trainingType = this.getAttribute('data-training');
+            const launchData = launchesData[trainingType];
+            
+            if (modalLaunchTitle && modalLaunchSubtitle && launchInterestModal) {
+                modalLaunchTitle.textContent = `${launchData.title}`;
+                modalLaunchSubtitle.textContent = launchData.subtitle;
+                
+                // Armazenar o tipo de treinamento no formulário
+                if (launchInterestForm) {
+                    launchInterestForm.setAttribute('data-training', trainingType);
+                }
+                
+                launchInterestModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            } else {
+                alert('Erro: Elementos do modal não encontrados');
+            }
+        });
+    });
+
+// Fechar modal de interesse
+if (closeLaunchModal) {
+    closeLaunchModal.addEventListener('click', () => {
+        launchInterestModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+}
+
+// Fechar modal de checkout
+if (closeCheckoutModal) {
+    closeCheckoutModal.addEventListener('click', () => {
+        launchCheckoutModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+}
+
+// Fechar ao clicar fora dos modais
+window.addEventListener('click', (e) => {
+    if (e.target === launchInterestModal) {
+        launchInterestModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    if (e.target === launchCheckoutModal) {
+        launchCheckoutModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+    // Máscara para WhatsApp no formulário de interesse
+    const interesseWhatsapp = document.getElementById('interesseWhatsapp');
+    if (interesseWhatsapp) {
+        interesseWhatsapp.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+                e.target.value = value;
+            }
+        });
+    }
+
+// Processar formulário de interesse (PASSO 1)
+if (launchInterestForm) {
+    launchInterestForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const trainingType = this.getAttribute('data-training');
+        const launchData = launchesData[trainingType];
+        const nome = document.getElementById('interesseNome').value;
+        const email = document.getElementById('interesseEmail').value;
+        const whatsapp = document.getElementById('interesseWhatsapp').value;
+        const motivacao = document.getElementById('interesseMotivacao').value;
+        
+        // Fechar modal de interesse
+        launchInterestModal.style.display = 'none';
+        
+        // Abrir modal de checkout automaticamente (PASSO 2)
+        openCheckoutModal(trainingType, { nome, email, whatsapp, motivacao });
+    });
+}
+
+    // Função para abrir modal de checkout
+    function openCheckoutModal(trainingType, userData) {
+    const launchData = launchesData[trainingType];
+    
+    // Preencher título e subtítulo
+    checkoutTrainingTitle.textContent = `Inscrição: ${launchData.title}`;
+    checkoutTrainingSubtitle.textContent = launchData.subtitle;
+    
+    // Preencher resumo do produto
+    trainingProductSummary.innerHTML = `
+        <div class="product-info">
+            <span class="product-icon">${launchData.icon}</span>
+            <div>
+                <h3>${launchData.title}</h3>
+                <p>${launchData.duration} • Máximo ${launchData.maxParticipants} participantes</p>
+            </div>
+        </div>
+        <div class="product-price">
+            <span class="price">R$ ${launchData.price.toFixed(2).replace('.', ',')}</span>
+            <span class="period">à vista</span>
+        </div>
+    `;
+    
+    // Preencher dados do usuário (readonly)
+    document.getElementById('checkoutNome').value = userData.nome;
+    document.getElementById('checkoutEmail').value = userData.email;
+    document.getElementById('checkoutWhatsapp').value = userData.whatsapp;
+    
+    // Atualizar opções de pagamento
+    document.getElementById('pixDiscount').textContent = `R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')} (10% desc.)`;
+    document.getElementById('cardInstallments').textContent = `${launchData.installments}x de R$ ${launchData.installmentValue.toFixed(2).replace('.', ',')}`;
+    
+    // Armazenar dados no formulário
+    launchCheckoutForm.setAttribute('data-training', trainingType);
+    launchCheckoutForm.setAttribute('data-user-data', JSON.stringify(userData));
+    
+    // Abrir modal
+    launchCheckoutModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+    // Máscara para CPF no checkout
+    const checkoutCpf = document.getElementById('checkoutCpf');
+    if (checkoutCpf) {
+        checkoutCpf.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+                e.target.value = value;
+            }
+        });
+    }
+
+// Processar formulário de checkout (PASSO 2 - FINAL)
+if (launchCheckoutForm) {
+    launchCheckoutForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const trainingType = this.getAttribute('data-training');
+        const userData = JSON.parse(this.getAttribute('data-user-data'));
+        const launchData = launchesData[trainingType];
+        
+        const cpf = document.getElementById('checkoutCpf').value;
+        const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
+        
+        const preco = pagamento === 'pix' ? launchData.pixDiscount : launchData.price;
+        const formaPagamento = pagamento === 'pix' ? 
+            `PIX à vista - R$ ${preco.toFixed(2).replace('.', ',')} (10% desconto)` :
+            `Cartão ${launchData.installments}x - R$ ${launchData.installmentValue.toFixed(2).replace('.', ',')}`;
+        
+        // Criar mensagem completa para WhatsApp
+        const mensagem = `🎯 *INSCRIÇÃO CONFIRMADA*
+
+*TREINAMENTO:* ${launchData.title}
+*TURMA:* ${launchData.subtitle}
+*DURAÇÃO:* ${launchData.duration}
+*VAGAS:* Máximo ${launchData.maxParticipants} participantes
+
+*DADOS DO PARTICIPANTE:*
+👤 Nome: ${userData.nome}
+📧 E-mail: ${userData.email}
+📱 WhatsApp: ${userData.whatsapp}
+🆔 CPF: ${cpf}
+
+*PAGAMENTO ESCOLHIDO:*
+💰 ${formaPagamento}
+
+${userData.motivacao ? `*MOTIVAÇÃO:*\n${userData.motivacao}\n\n` : ''}*PRÓXIMOS PASSOS:*
+✅ Inscrição realizada com sucesso
+📋 Aguardando instruções de pagamento
+📚 Material será enviado após confirmação
+
+Obrigado pela confiança! 🚀`;
+
+        // Redirecionar para WhatsApp
+        const whatsappUrl = `https://wa.me/5519991309355?text=${encodeURIComponent(mensagem)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        // Fechar modal
+        launchCheckoutModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        
+        // Limpar formulários
+        launchInterestForm.reset();
+        launchCheckoutForm.reset();
+        
+        // Mostrar mensagem de sucesso
+        alert('Inscrição realizada com sucesso! Você será redirecionado para o WhatsApp para receber as instruções de pagamento.');
+    });
+}
+
+}); // Fim do DOMContentLoaded

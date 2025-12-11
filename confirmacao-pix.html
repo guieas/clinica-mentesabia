@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Pagamento PIX - Mente Sábia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .confirmation-page {
+            min-height: 100vh;
+            background: var(--light-bg);
+            padding: 2rem 0;
+        }
+        
+        .confirmation-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .confirmation-header {
+            margin-bottom: 2rem;
+        }
+        
+        .confirmation-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold), #c99d2e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .confirmation-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .confirmation-subtitle {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+        
+        .training-info {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .training-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .training-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .training-detail {
+            text-align: left;
+        }
+        
+        .training-detail strong {
+            color: var(--primary-color);
+        }
+        
+        .training-instructors {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .training-instructors h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .training-instructors h4::before {
+            content: '👥';
+            font-size: 1rem;
+        }
+        
+        .confirmation-instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.8rem;
+        }
+        
+        .confirmation-instructor-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .confirmation-instructor-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.2rem;
+        }
+        
+        .confirmation-instructor-role {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 0.1rem;
+        }
+        
+        .confirmation-instructor-credential {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+
+        
+        .pix-section {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.03));
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .pix-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .pix-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .pix-qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: var(--white);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            margin: 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--primary-color);
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .pix-key-section {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+        }
+        
+        .pix-key-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pix-key-value {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--gold);
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .copy-key-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-key-btn:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .instructions {
+            text-align: left;
+            margin: 2rem 0;
+        }
+        
+        .instructions h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .instruction-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 10px;
+        }
+        
+        .step-number {
+            background: var(--gold);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .btn-send-receipt {
+            background: linear-gradient(135deg, #25d366, #20ba5a);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 2rem auto 1rem;
+        }
+        
+        .btn-send-receipt:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-icon {
+            font-size: 1.3rem;
+        }
+        
+        .support-note {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .confirmation-container {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            .training-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .pix-amount {
+                font-size: 2rem;
+            }
+            
+            .pix-qr-placeholder {
+                width: 180px;
+                height: 180px;
+            }
+
+            .confirmation-instructors-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+
+            .confirmation-instructor-card {
+                padding: 0.8rem;
+            }
+
+            .confirmation-instructor-name {
+                font-size: 0.9rem;
+            }
+
+            .confirmation-instructor-role {
+                font-size: 0.8rem;
+            }
+
+            .confirmation-instructor-credential {
+                font-size: 0.75rem;
+            }
+
+            .training-instructors {
+                padding: 1rem;
+            }
+
+            .training-instructors h4 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-page">
+        <div class="confirmation-container">
+            <div class="confirmation-header">
+                <div class="confirmation-icon">✓</div>
+                <h1 class="confirmation-title">Inscrição Confirmada!</h1>
+                <p class="confirmation-subtitle">Agora finalize seu pagamento via PIX</p>
+            </div>
+            
+            <div class="training-info" id="trainingInfo">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+            
+            <div class="pix-section">
+                <h2 class="pix-title">Pagamento via PIX</h2>
+                <div class="pix-amount" id="pixAmount">R$ 2.880,00</div>
+                
+                <div class="pix-qr-placeholder">
+                    <div>
+                        <strong>QR Code PIX</strong><br>
+                        <small>Escaneie com seu banco<br>ou use a chave abaixo</small>
+                    </div>
+                </div>
+                
+                <div class="pix-key-section">
+                    <div class="pix-key-label">Chave PIX (CNPJ):</div>
+                    <div class="pix-key-value" id="pixKey">57.904.661/0001-69</div>
+                    <button class="copy-key-btn" onclick="copyPixKey()">Copiar Chave</button>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h4>Como pagar:</h4>
+                <div class="instruction-step">
+                    <div class="step-number">1</div>
+                    <div>Abra o app do seu banco e vá em PIX</div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">2</div>
+                    <div>Escaneie o QR Code ou cole a chave PIX</div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">3</div>
+                    <div>Confirme o pagamento no valor exato</div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">4</div>
+                    <div>Tire um print do comprovante e envie abaixo</div>
+                </div>
+            </div>
+            
+            <button class="btn-send-receipt" onclick="sendReceipt()">
+                <span class="whatsapp-icon">📱</span>
+                Enviar Comprovante
+            </button>
+            
+            <p class="support-note">
+                Após o envio do comprovante, você receberá a confirmação e acesso ao treinamento em até 2 horas úteis.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Recuperar dados da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const trainingType = urlParams.get('training');
+        const userData = JSON.parse(decodeURIComponent(urlParams.get('data') || '{}'));
+        
+        // Dados dos treinamentos
+        const trainingData = {
+            dbt: {
+                title: 'Treinamento de Habilidades em DBT',
+                subtitle: 'Próxima turma: Fevereiro 2026',
+                duration: '16 semanas',
+                pixAmount: 'R$ 2.880,00',
+                instructors: [
+                    { name: 'Gabriela Bueno', credential: 'CRP: 06/179325', role: 'Psicóloga' },
+                    { name: 'Giovanna Schiavinato', credential: 'CRP: 06/154598', role: 'Psicóloga' }
+                ]
+            },
+            eating: {
+                title: 'Treinamento para Comer Emocional',
+                subtitle: 'Próxima turma: Fevereiro 2026',
+                duration: '12 semanas',
+                pixAmount: 'R$ 2.880,00',
+                instructors: [
+                    { name: 'Cesar Moraes', credential: 'CRN: 43703', role: 'Nutricionista' },
+                    { name: 'Renata Mociaro', credential: 'CRP: 06/121565', role: 'Psicóloga' }
+                ]
+            }
+        };
+        
+        // Preencher informações do treinamento
+        if (trainingType && trainingData[trainingType]) {
+            const training = trainingData[trainingType];
+            
+            // Gerar HTML dos instrutores
+            const instructorsHtml = training.instructors.map(instructor => 
+                `<div class="confirmation-instructor-card">
+                    <div class="confirmation-instructor-name">${instructor.name}</div>
+                    <div class="confirmation-instructor-role">${instructor.role}</div>
+                    <div class="confirmation-instructor-credential">${instructor.credential}</div>
+                </div>`
+            ).join('');
+            
+            document.getElementById('trainingInfo').innerHTML = `
+                <h3>${training.title}</h3>
+                <div class="training-details">
+                    <div class="training-detail">
+                        <strong>Turma:</strong> ${training.subtitle}
+                    </div>
+                    <div class="training-detail">
+                        <strong>Duração:</strong> ${training.duration}
+                    </div>
+                    <div class="training-detail">
+                        <strong>Participante:</strong> ${userData.nome || 'Nome não informado'}
+                    </div>
+                    <div class="training-detail">
+                        <strong>Modalidade:</strong> 100% Online
+                    </div>
+                </div>
+                <div class="training-instructors">
+                    <h4>Instrutores</h4>
+                    <div class="confirmation-instructors-grid">
+                        ${instructorsHtml}
+                    </div>
+                </div>
+
+            `;
+            
+            document.getElementById('pixAmount').textContent = training.pixAmount;
+        }
+        
+        // Função para copiar chave PIX
+        function copyPixKey() {
+            const pixKey = document.getElementById('pixKey').textContent;
+            navigator.clipboard.writeText(pixKey).then(() => {
+                const btn = document.querySelector('.copy-key-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copiado!';
+                btn.style.background = '#10b981';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+        
+        // Função para enviar comprovante
+        function sendReceipt() {
+            const training = trainingData[trainingType];
+            const message = `🧾 *COMPROVANTE DE PAGAMENTO PIX*
+
+*TREINAMENTO:* ${training?.title || 'Não identificado'}
+*PARTICIPANTE:* ${userData.nome || 'Nome não informado'}
+*VALOR PAGO:* ${training?.pixAmount || 'Valor não identificado'}
+*CHAVE PIX:* 57.904.661/0001-69
+
+📎 *Segue em anexo o comprovante de pagamento*
+
+Aguardo confirmação para liberação do acesso ao treinamento.
+
+Obrigado(a)! 🙏`;
+            
+            const whatsappUrl = `https://wa.me/5519991309355?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

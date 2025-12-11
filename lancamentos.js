@@ -1,0 +1,197 @@
+// Código dos Lançamentos - Formulário Único Simplificado
+console.log('Script de lançamentos carregado');
+
+// Dados dos treinamentos
+const launchesData = {
+    dbt: {
+        title: 'Treinamento de Habilidades em DBT',
+        subtitle: 'Próxima turma: Fevereiro 2026',
+        price: 3200,
+        installments: 12,
+        installmentValue: 266.67, // 3200/12
+        pixDiscount: 2880, // 10% desconto
+        duration: '16 semanas',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg>',
+        instructors: [
+            { name: 'Gabriela Bueno', credential: 'CRP: 06/179325', role: 'Psicóloga' },
+            { name: 'Giovanna Schiavinato', credential: 'CRP: 06/154598', role: 'Psicóloga' }
+        ]
+    },
+    eating: {
+        title: 'Treinamento para Comer Emocional',
+        subtitle: 'Próxima turma: Fevereiro 2026',
+        price: 3200,
+        installments: 12,
+        installmentValue: 266.67, // 3200/12
+        pixDiscount: 2880, // 10% desconto
+        duration: '12 semanas',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
+        instructors: [
+            { name: 'Cesar Moraes', credential: 'CRN: 43703', role: 'Nutricionista' },
+            { name: 'Renata Mociaro', credential: 'CRP: 06/121565', role: 'Psicóloga' }
+        ]
+    }
+};
+
+// Aguardar página carregar completamente
+window.addEventListener('load', function() {
+    console.log('Página carregada, configurando lançamentos...');
+    
+    // Elementos do DOM
+    const launchModal = document.getElementById('launchModal');
+    const launchForm = document.getElementById('launchForm');
+    
+    // Configurar botões de participação
+    const buttons = document.querySelectorAll('.btn-launch-interest');
+    console.log('Botões encontrados:', buttons.length);
+    
+    buttons.forEach(function(button, index) {
+        console.log('Configurando botão', index + 1);
+        
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Botão clicado!');
+            
+            const trainingType = this.getAttribute('data-training');
+            const launchData = launchesData[trainingType];
+            
+            // Preencher dados do modal
+            document.getElementById('launchTitle').textContent = launchData.title;
+            document.getElementById('launchSubtitle').textContent = launchData.subtitle;
+            
+            // Preencher resumo do produto
+            document.getElementById('trainingProductSummary').innerHTML = `
+                <div class="product-info">
+                    <span class="product-icon">${launchData.icon}</span>
+                    <div>
+                        <h3>${launchData.title}</h3>
+                        <p>${launchData.duration} • 100% Online</p>
+                    </div>
+                </div>
+                <div class="product-price">
+                    <span class="price">R$ ${launchData.price.toFixed(2).replace('.', ',')}</span>
+                    <span class="period">no cartão</span>
+                </div>
+            `;
+            
+            // Atualizar opções de pagamento
+            document.getElementById('pixDiscount').textContent = `R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')} (10% desc.)`;
+            document.getElementById('cardInstallments').textContent = `${launchData.installments}x de R$ ${launchData.installmentValue.toFixed(2).replace('.', ',')}`;
+            
+            // Armazenar tipo de treinamento
+            launchForm.setAttribute('data-training', trainingType);
+            
+            if (launchModal) {
+                console.log('Abrindo modal de inscrição...');
+                launchModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+    
+    // Processar formulário de inscrição (ÚNICO PASSO)
+    if (launchForm) {
+        launchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Formulário de inscrição enviado');
+            
+            const trainingType = this.getAttribute('data-training');
+            const launchData = launchesData[trainingType];
+            
+            // Coletar dados do formulário
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const cpf = document.getElementById('cpf').value;
+            const motivacao = document.getElementById('motivacao').value;
+            const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
+            
+            const userData = { nome, email, whatsapp, cpf, motivacao };
+            
+            // Fechar modal
+            launchModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            launchForm.reset();
+            
+            if (pagamento === 'pix') {
+                // PIX: Redirecionar para página de confirmação
+                const userDataEncoded = encodeURIComponent(JSON.stringify(userData));
+                window.location.href = `confirmacao-pix.html?training=${trainingType}&data=${userDataEncoded}`;
+            } else {
+                // CARTÃO: Fluxo via WhatsApp (Mercado Pago)
+                const preco = launchData.price;
+                const formaPagamento = `Cartão de Crédito - R$ ${preco.toFixed(2).replace('.', ',')} (parcelamento em até 12x)`;
+                
+                const mensagem = `🎯 *INSCRIÇÃO CONFIRMADA - CARTÃO*
+
+*TREINAMENTO:* ${launchData.title}
+*TURMA:* ${launchData.subtitle}
+*DURAÇÃO:* ${launchData.duration}
+
+*DADOS DO PARTICIPANTE:*
+👤 Nome: ${nome}
+📧 E-mail: ${email}
+📱 WhatsApp: ${whatsapp}
+🆔 CPF: ${cpf}
+
+*PAGAMENTO ESCOLHIDO:*
+💳 ${formaPagamento}
+💰 Taxa de parcelamento paga pelo aluno via Mercado Pago
+
+${motivacao ? `*MOTIVAÇÃO:*\n${motivacao}\n\n` : ''}*PRÓXIMOS PASSOS:*
+✅ Inscrição realizada com sucesso
+💳 Aguardando link do Mercado Pago para pagamento
+📚 Material será enviado após confirmação
+
+Obrigado pela confiança! 🚀`;
+
+                // Redirecionar para WhatsApp
+                const whatsappUrl = `https://wa.me/5519991309355?text=${encodeURIComponent(mensagem)}`;
+                window.open(whatsappUrl, '_blank');
+                
+                alert('Inscrição realizada com sucesso! Você será redirecionado para o WhatsApp para receber o link de pagamento do Mercado Pago.');
+            }
+        });
+    }
+    
+    // Máscaras de input
+    const whatsappInput = document.getElementById('whatsapp');
+    if (whatsappInput) {
+        whatsappInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+                e.target.value = value;
+            }
+        });
+    }
+    
+    const cpfInput = document.getElementById('cpf');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+                e.target.value = value;
+            }
+        });
+    }
+    
+    // Fechar modal
+    document.querySelector('.close-launch-modal')?.addEventListener('click', function() {
+        launchModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Pagamento simplificado - sem JavaScript adicional necessário
+    
+    // Fechar ao clicar fora
+    window.addEventListener('click', function(e) {
+        if (e.target === launchModal) {
+            launchModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    console.log('Lançamentos configurados com sucesso!');
+});

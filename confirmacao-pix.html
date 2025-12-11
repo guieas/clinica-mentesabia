@@ -620,11 +620,20 @@
             const message = `🧾 *COMPROVANTE DE PAGAMENTO PIX*
 
 *TREINAMENTO:* ${training?.title || 'Não identificado'}
-*PARTICIPANTE:* ${userData.nome || 'Nome não informado'}
-*VALOR PAGO:* ${training?.pixAmount || 'Valor não identificado'}
-*CHAVE PIX:* 57.904.661/0001-69
+*TURMA:* ${training?.subtitle || 'Não identificado'}
+*DURAÇÃO:* ${training?.duration || 'Não identificado'}
 
-📎 *Segue em anexo o comprovante de pagamento*
+*DADOS DO PARTICIPANTE:*
+👤 Nome: ${userData.nome || 'Nome não informado'}
+📧 E-mail: ${userData.email || 'E-mail não informado'}
+📱 WhatsApp: ${userData.whatsapp || 'WhatsApp não informado'}
+🆔 CPF: ${userData.cpf || 'CPF não informado'}
+
+*PAGAMENTO:*
+💰 PIX à vista: ${training?.pixAmount || 'Valor não identificado'}
+✅ Comprovante em anexo
+
+${userData.motivacao ? `*MOTIVAÇÃO:*\n${userData.motivacao}\n\n` : ''}📎 *Segue em anexo o comprovante de pagamento*
 
 Aguardo confirmação para liberação do acesso ao treinamento.
 

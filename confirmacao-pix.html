@@ -61,7 +61,6 @@
             padding: 1.5rem;
             border-radius: 15px;
             margin-bottom: 2rem;
-            border-left: 4px solid var(--gold);
         }
         
         .training-info h3 {
@@ -301,11 +300,86 @@
             font-size: 1.3rem;
         }
         
-        .support-note {
+        .pricing-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .price-option {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .pix-selected {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
+            border: 2px solid var(--gold);
+            transform: scale(1.02);
+        }
+        
+        .card-option {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            opacity: 0.7;
+        }
+        
+        .price-label {
             font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+        
+        .pix-selected .price-value {
+            color: var(--gold);
+        }
+        
+        .price-installment {
+            font-size: 0.8rem;
             color: var(--light-text);
             font-style: italic;
-            margin-top: 1rem;
+        }
+        
+        .important-notice {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .important-notice h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: #d68910;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .important-notice p {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .important-notice p:last-child {
+            margin-bottom: 0;
         }
         
         @media (max-width: 768px) {
@@ -359,6 +433,24 @@
             .training-instructors h4 {
                 font-size: 1rem;
             }
+
+            .pricing-comparison {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+                padding: 1.2rem;
+            }
+
+            .price-value {
+                font-size: 1.5rem;
+            }
+
+            .important-notice {
+                padding: 1.2rem;
+            }
+
+            .important-notice h4 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -367,14 +459,26 @@
         <div class="confirmation-container">
             <div class="confirmation-header">
                 <div class="confirmation-icon">✓</div>
-                <h1 class="confirmation-title">Inscrição Confirmada!</h1>
-                <p class="confirmation-subtitle">Agora finalize seu pagamento via PIX</p>
+                <h1 class="confirmation-title">Pré-Inscrição Realizada!</h1>
+                <p class="confirmation-subtitle">Finalize seu pagamento via PIX para confirmar sua inscrição</p>
             </div>
             
             <div class="training-info" id="trainingInfo">
                 <!-- Será preenchido via JavaScript -->
             </div>
             
+            <div class="pricing-comparison">
+                <div class="price-option pix-selected">
+                    <div class="price-label">PIX à vista (10% desconto)</div>
+                    <div class="price-value">R$ 2.880,00</div>
+                </div>
+                <div class="price-option card-option">
+                    <div class="price-label">Cartão (até 12x)</div>
+                    <div class="price-value">R$ 3.200,00</div>
+                    <div class="price-installment">12x de R$ 266,67</div>
+                </div>
+            </div>
+
             <div class="pix-section">
                 <h2 class="pix-title">Pagamento via PIX</h2>
                 <div class="pix-amount" id="pixAmount">R$ 2.880,00</div>
@@ -416,9 +520,11 @@
                 Enviar Comprovante
             </button>
             
-            <p class="support-note">
-                Após o envio do comprovante, você receberá a confirmação e acesso ao treinamento em até 2 horas úteis.
-            </p>
+            <div class="important-notice">
+                <h4>⚠️ Importante</h4>
+                <p><strong>Sua inscrição será confirmada apenas após a verificação do pagamento.</strong></p>
+                <p>Após a confirmação, você receberá os próximos passos com todas as informações necessárias.</p>
+            </div>
         </div>
     </div>
     
@@ -524,48 +630,10 @@ Aguardo confirmação para liberação do acesso ao treinamento.
 
 Obrigado(a)! 🙏`;
             
-            // Enviar também por email
-            enviarComprovanteEmail(training, userData);
-            
             const whatsappUrl = `https://wa.me/5519991309355?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
-        
-        // Função para enviar notificação de comprovante por email
-        function enviarComprovanteEmail(training, userData) {
-            const dataAtual = new Date().toLocaleString('pt-BR');
-            const assunto = `Comprovante PIX Recebido: ${training?.title || 'Treinamento'}`;
-            
-            const corpoEmail = `COMPROVANTE PIX ENVIADO PELO CLIENTE
 
-Data/Hora: ${dataAtual}
-
-=== DADOS DO PAGAMENTO ===
-Treinamento: ${training?.title || 'Não identificado'}
-Participante: ${userData.nome || 'Nome não informado'}
-Valor: ${training?.pixAmount || 'Valor não identificado'}
-Chave PIX: 57.904.661/0001-69
-
-=== DADOS DO CLIENTE ===
-Nome: ${userData.nome || 'Não informado'}
-E-mail: ${userData.email || 'Não informado'}
-WhatsApp: ${userData.whatsapp || 'Não informado'}
-CPF: ${userData.cpf || 'Não informado'}
-
-=== AÇÃO NECESSÁRIA ===
-- Cliente enviou comprovante via WhatsApp
-- Verificar pagamento e confirmar inscrição
-- Liberar acesso ao treinamento
-
----
-Este email foi gerado automaticamente pelo sistema.`;
-
-            const emailUrl = `mailto:mentesabiapsicologia.2025@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
-            
-            setTimeout(() => {
-                window.open(emailUrl, '_blank');
-            }, 500);
-        }
     </script>
 </body>
 </html>

@@ -63,14 +63,22 @@ window.addEventListener('load', function() {
             document.getElementById('trainingProductSummary').innerHTML = `
                 <div class="product-info">
                     <span class="product-icon">${launchData.icon}</span>
-                    <div>
+                    <div class="product-details">
                         <h3>${launchData.title}</h3>
                         <p>${launchData.duration} • 100% Online</p>
                     </div>
                 </div>
-                <div class="product-price">
-                    <span class="price">R$ ${launchData.price.toFixed(2).replace('.', ',')}</span>
-                    <span class="period">no cartão</span>
+                <div class="pricing-highlight">
+                    <div class="price-option">
+                        <span class="price-label">PIX à vista</span>
+                        <span class="price-value pix-price">R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')}</span>
+                        <span class="price-detail">(10% desconto)</span>
+                    </div>
+                    <div class="price-option">
+                        <span class="price-label">Cartão</span>
+                        <span class="price-value card-price">12x R$ ${launchData.installmentValue.toFixed(2).replace('.', ',')}</span>
+                        <span class="price-detail">ou R$ ${launchData.price.toFixed(2).replace('.', ',')} à vista</span>
+                    </div>
                 </div>
             `;
             
@@ -112,9 +120,6 @@ window.addEventListener('load', function() {
             launchModal.style.display = 'none';
             document.body.style.overflow = 'auto';
             launchForm.reset();
-            
-            // Enviar dados por email (SEMPRE)
-            enviarDadosPorEmail(userData, launchData, pagamento);
             
             if (pagamento === 'pix') {
                 // PIX: Redirecionar para página de confirmação
@@ -199,51 +204,3 @@ Obrigado pela confiança! 🚀`;
     console.log('Lançamentos configurados com sucesso!');
 });
 
-// Função para enviar dados por email
-function enviarDadosPorEmail(userData, launchData, tipoPagamento) {
-    const dataAtual = new Date().toLocaleString('pt-BR');
-    const valorPagamento = tipoPagamento === 'pix' ? 
-        `R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')} (PIX - 10% desconto)` : 
-        `R$ ${launchData.price.toFixed(2).replace('.', ',')} (Cartão - até 12x)`;
-    
-    const assunto = `Nova Inscrição: ${launchData.title}`;
-    
-    const corpoEmail = `NOVA INSCRIÇÃO RECEBIDA
-    
-Data/Hora: ${dataAtual}
-
-=== DADOS DO TREINAMENTO ===
-Treinamento: ${launchData.title}
-Turma: ${launchData.subtitle}
-Duração: ${launchData.duration}
-Modalidade: 100% Online
-
-=== DADOS DO PARTICIPANTE ===
-Nome: ${userData.nome}
-E-mail: ${userData.email}
-WhatsApp: ${userData.whatsapp}
-CPF: ${userData.cpf}
-
-=== PAGAMENTO ===
-Forma escolhida: ${tipoPagamento.toUpperCase()}
-Valor: ${valorPagamento}
-
-=== MOTIVAÇÃO ===
-${userData.motivacao || 'Não informado'}
-
-=== PRÓXIMOS PASSOS ===
-${tipoPagamento === 'pix' ? 
-    '- Cliente será direcionado para página de confirmação PIX\n- Aguardar comprovante via WhatsApp' : 
-    '- Cliente será direcionado para WhatsApp\n- Enviar link do Mercado Pago'}
-
----
-Este email foi gerado automaticamente pelo sistema de inscrições.`;
-
-    // Abrir cliente de email
-    const emailUrl = `mailto:mentesabiapsicologia.2025@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
-    
-    // Usar setTimeout para não interferir no fluxo principal
-    setTimeout(() => {
-        window.open(emailUrl, '_blank');
-    }, 1000);
-}

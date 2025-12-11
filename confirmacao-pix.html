@@ -171,20 +171,30 @@
             margin-bottom: 1rem;
         }
         
-        .pix-qr-placeholder {
+        .pix-qr-container {
+            text-align: center;
+            margin: 1.5rem auto;
+        }
+        
+        .pix-qr-image {
             width: 200px;
             height: 200px;
-            background: var(--white);
             border: 2px solid var(--gold);
             border-radius: 15px;
-            margin: 1.5rem auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .pix-qr-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .pix-qr-instruction {
+            margin-top: 1rem;
+            font-size: 0.9rem;
             color: var(--primary-color);
-            text-align: center;
-            line-height: 1.4;
+            font-weight: 500;
         }
         
         .pix-key-section {
@@ -312,9 +322,13 @@
                 font-size: 2rem;
             }
             
-            .pix-qr-placeholder {
+            .pix-qr-image {
                 width: 180px;
                 height: 180px;
+            }
+            
+            .pix-qr-instruction {
+                font-size: 0.85rem;
             }
 
             .confirmation-instructors-grid {
@@ -365,11 +379,9 @@
                 <h2 class="pix-title">Pagamento via PIX</h2>
                 <div class="pix-amount" id="pixAmount">R$ 2.880,00</div>
                 
-                <div class="pix-qr-placeholder">
-                    <div>
-                        <strong>QR Code PIX</strong><br>
-                        <small>Escaneie com seu banco<br>ou use a chave abaixo</small>
-                    </div>
+                <div class="pix-qr-container">
+                    <img src="images/qrcode.png" alt="QR Code PIX" class="pix-qr-image">
+                    <p class="pix-qr-instruction">Escaneie com seu banco ou use a chave abaixo</p>
                 </div>
                 
                 <div class="pix-key-section">
@@ -429,12 +441,12 @@
                 ]
             },
             eating: {
-                title: 'Treinamento para Comer Emocional',
+                title: 'Programa para o Comer Emocional e Compulsivo',
                 subtitle: 'Próxima turma: Fevereiro 2026',
                 duration: '12 semanas',
                 pixAmount: 'R$ 2.880,00',
                 instructors: [
-                    { name: 'Cesar Moraes', credential: 'CRN: 43703', role: 'Nutricionista' },
+                    { name: 'César Moraes', credential: 'CRN: 43703', role: 'Nutricionista' },
                     { name: 'Renata Mociaro', credential: 'CRP: 06/121565', role: 'Psicóloga' }
                 ]
             }
@@ -512,8 +524,47 @@ Aguardo confirmação para liberação do acesso ao treinamento.
 
 Obrigado(a)! 🙏`;
             
+            // Enviar também por email
+            enviarComprovanteEmail(training, userData);
+            
             const whatsappUrl = `https://wa.me/5519991309355?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+        }
+        
+        // Função para enviar notificação de comprovante por email
+        function enviarComprovanteEmail(training, userData) {
+            const dataAtual = new Date().toLocaleString('pt-BR');
+            const assunto = `Comprovante PIX Recebido: ${training?.title || 'Treinamento'}`;
+            
+            const corpoEmail = `COMPROVANTE PIX ENVIADO PELO CLIENTE
+
+Data/Hora: ${dataAtual}
+
+=== DADOS DO PAGAMENTO ===
+Treinamento: ${training?.title || 'Não identificado'}
+Participante: ${userData.nome || 'Nome não informado'}
+Valor: ${training?.pixAmount || 'Valor não identificado'}
+Chave PIX: 57.904.661/0001-69
+
+=== DADOS DO CLIENTE ===
+Nome: ${userData.nome || 'Não informado'}
+E-mail: ${userData.email || 'Não informado'}
+WhatsApp: ${userData.whatsapp || 'Não informado'}
+CPF: ${userData.cpf || 'Não informado'}
+
+=== AÇÃO NECESSÁRIA ===
+- Cliente enviou comprovante via WhatsApp
+- Verificar pagamento e confirmar inscrição
+- Liberar acesso ao treinamento
+
+---
+Este email foi gerado automaticamente pelo sistema.`;
+
+            const emailUrl = `mailto:mentesabiapsicologia.2025@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
+            
+            setTimeout(() => {
+                window.open(emailUrl, '_blank');
+            }, 500);
         }
     </script>
 </body>

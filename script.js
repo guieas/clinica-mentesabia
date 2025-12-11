@@ -24,7 +24,7 @@ const servicesData = {
         description: 'Programa estruturado para desenvolver habilidades de atenção plena, regulação emocional, tolerância ao mal-estar e efetividade interpessoal. Indicado para quem busca mais estabilidade e clareza no dia a dia.'
     },
     2: {
-        title: 'Treinamento para Comer Emocional e Compulsivo',
+        title: 'Programa para o Comer Emocional e Compulsivo',
         description: 'Ciclo de encontros focado em compreender o comer impulsivo e construir uma relação mais consciente, funcional e compassiva com a comida. Baseado em DBT e em estratégias comportamentais práticas.'
     },
     3: {
@@ -340,7 +340,7 @@ window.addEventListener('load', function() {
         icon: '🧠'
     },
     eating: {
-        title: 'Treinamento para Comer Emocional',
+        title: 'Programa para o Comer Emocional e Compulsivo',
         subtitle: 'Próxima turma: Abril 2025',
         price: 397,
         installments: 3,

@@ -18,7 +18,7 @@ const launchesData = {
         ]
     },
     eating: {
-        title: 'Treinamento para Comer Emocional',
+        title: 'Programa para o Comer Emocional e Compulsivo',
         subtitle: 'Próxima turma: Fevereiro 2026',
         price: 3200,
         installments: 12,
@@ -27,7 +27,7 @@ const launchesData = {
         duration: '12 semanas',
         icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
         instructors: [
-            { name: 'Cesar Moraes', credential: 'CRN: 43703', role: 'Nutricionista' },
+            { name: 'César Moraes', credential: 'CRN: 43703', role: 'Nutricionista' },
             { name: 'Renata Mociaro', credential: 'CRP: 06/121565', role: 'Psicóloga' }
         ]
     }
@@ -113,6 +113,9 @@ window.addEventListener('load', function() {
             document.body.style.overflow = 'auto';
             launchForm.reset();
             
+            // Enviar dados por email (SEMPRE)
+            enviarDadosPorEmail(userData, launchData, pagamento);
+            
             if (pagamento === 'pix') {
                 // PIX: Redirecionar para página de confirmação
                 const userDataEncoded = encodeURIComponent(JSON.stringify(userData));
@@ -195,3 +198,52 @@ Obrigado pela confiança! 🚀`;
     
     console.log('Lançamentos configurados com sucesso!');
 });
+
+// Função para enviar dados por email
+function enviarDadosPorEmail(userData, launchData, tipoPagamento) {
+    const dataAtual = new Date().toLocaleString('pt-BR');
+    const valorPagamento = tipoPagamento === 'pix' ? 
+        `R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')} (PIX - 10% desconto)` : 
+        `R$ ${launchData.price.toFixed(2).replace('.', ',')} (Cartão - até 12x)`;
+    
+    const assunto = `Nova Inscrição: ${launchData.title}`;
+    
+    const corpoEmail = `NOVA INSCRIÇÃO RECEBIDA
+    
+Data/Hora: ${dataAtual}
+
+=== DADOS DO TREINAMENTO ===
+Treinamento: ${launchData.title}
+Turma: ${launchData.subtitle}
+Duração: ${launchData.duration}
+Modalidade: 100% Online
+
+=== DADOS DO PARTICIPANTE ===
+Nome: ${userData.nome}
+E-mail: ${userData.email}
+WhatsApp: ${userData.whatsapp}
+CPF: ${userData.cpf}
+
+=== PAGAMENTO ===
+Forma escolhida: ${tipoPagamento.toUpperCase()}
+Valor: ${valorPagamento}
+
+=== MOTIVAÇÃO ===
+${userData.motivacao || 'Não informado'}
+
+=== PRÓXIMOS PASSOS ===
+${tipoPagamento === 'pix' ? 
+    '- Cliente será direcionado para página de confirmação PIX\n- Aguardar comprovante via WhatsApp' : 
+    '- Cliente será direcionado para WhatsApp\n- Enviar link do Mercado Pago'}
+
+---
+Este email foi gerado automaticamente pelo sistema de inscrições.`;
+
+    // Abrir cliente de email
+    const emailUrl = `mailto:mentesabiapsicologia.2025@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
+    
+    // Usar setTimeout para não interferir no fluxo principal
+    setTimeout(() => {
+        window.open(emailUrl, '_blank');
+    }, 1000);
+}

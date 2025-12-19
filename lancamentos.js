@@ -5,7 +5,7 @@ console.log('Script de lançamentos carregado');
 const launchesData = {
     dbt: {
         title: 'Treinamento de Habilidades em DBT',
-        subtitle: 'Próxima turma: Fevereiro 2026',
+        subtitle: 'Próxima turma: 03/03/2026',
         price: 3200,
         installments: 12,
         installmentValue: 266.67, // 3200/12
@@ -19,7 +19,7 @@ const launchesData = {
     },
     eating: {
         title: 'Programa para o Comer Emocional e Compulsivo',
-        subtitle: 'Próxima turma: Fevereiro 2026',
+        subtitle: 'Próxima turma: 05/03/2026',
         price: 3200,
         installments: 12,
         installmentValue: 266.67, // 3200/12
@@ -71,20 +71,20 @@ window.addEventListener('load', function() {
                 <div class="pricing-highlight">
                     <div class="price-option">
                         <span class="price-label">PIX à vista</span>
-                        <span class="price-value pix-price">R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')}</span>
+                        <span class="price-value pix-price" style="min-width: 120px; display: inline-block;">R$ ${launchData.pixDiscount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>
                         <span class="price-detail">(10% desconto)</span>
                     </div>
                     <div class="price-option">
                         <span class="price-label">Cartão</span>
-                        <span class="price-value card-price">12x R$ ${launchData.installmentValue.toFixed(2).replace('.', ',')}</span>
-                        <span class="price-detail">ou R$ ${launchData.price.toFixed(2).replace('.', ',')} à vista</span>
+                        <span class="price-value card-price" style="min-width: 120px; display: inline-block;">R$ ${launchData.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>
+                        <span class="price-detail">em até 12x</span>
                     </div>
                 </div>
             `;
             
             // Atualizar opções de pagamento
             document.getElementById('pixDiscount').textContent = `R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')} (10% desc.)`;
-            document.getElementById('cardInstallments').textContent = `${launchData.installments}x de R$ ${launchData.installmentValue.toFixed(2).replace('.', ',')}`;
+            document.getElementById('cardInstallments').textContent = `R$ ${launchData.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} em até ${launchData.installments}x`;
             
             // Armazenar tipo de treinamento
             launchForm.setAttribute('data-training', trainingType);
@@ -144,7 +144,7 @@ window.addEventListener('load', function() {
 
 *PAGAMENTO ESCOLHIDO:*
 💳 ${formaPagamento}
-💰 Taxa de parcelamento paga pelo aluno via Mercado Pago
+💰 Taxa de parcelamento repassada para o cliente via Mercado Pago
 
 ${motivacao ? `*MOTIVAÇÃO:*\n${motivacao}\n\n` : ''}*PRÓXIMOS PASSOS:*
 ✅ Inscrição realizada com sucesso

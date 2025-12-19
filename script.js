@@ -330,7 +330,7 @@ window.addEventListener('load', function() {
     const launchesData = {
     dbt: {
         title: 'Treinamento de Habilidades em DBT',
-        subtitle: 'Próxima turma: Março 2025',
+        subtitle: 'Próxima turma: 03/03/2026',
         price: 497,
         installments: 3,
         installmentValue: 165.67,
@@ -341,7 +341,7 @@ window.addEventListener('load', function() {
     },
     eating: {
         title: 'Programa para o Comer Emocional e Compulsivo',
-        subtitle: 'Próxima turma: Abril 2025',
+        subtitle: 'Próxima turma: 05/03/2026',
         price: 397,
         installments: 3,
         installmentValue: 132.33,
@@ -474,7 +474,7 @@ if (launchInterestForm) {
     
     // Atualizar opções de pagamento
     document.getElementById('pixDiscount').textContent = `R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')} (10% desc.)`;
-    document.getElementById('cardInstallments').textContent = `${launchData.installments}x de R$ ${launchData.installmentValue.toFixed(2).replace('.', ',')}`;
+    document.getElementById('cardInstallments').textContent = `R$ ${launchData.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} em até ${launchData.installments}x`;
     
     // Armazenar dados no formulário
     launchCheckoutForm.setAttribute('data-training', trainingType);

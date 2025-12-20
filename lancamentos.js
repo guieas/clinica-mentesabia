@@ -1,6 +1,16 @@
 // Código dos Lançamentos - Formulário Único Simplificado
 console.log('Script de lançamentos carregado');
 
+// Links de pagamento do Mercado Pago
+const PAYMENT_LINKS = {
+    dbt: {
+        link: 'https://mpago.la/2Vr37Xo'  // DBT - Treinamento de Habilidades
+    },
+    eating: {
+        link: 'https://mpago.la/316ii7v'  // Comer Emocional e Compulsivo
+    }
+};
+
 // Dados dos treinamentos
 const launchesData = {
     dbt: {
@@ -8,8 +18,8 @@ const launchesData = {
         subtitle: 'Próxima turma: 03/03/2026',
         price: 3200,
         installments: 12,
-        installmentValue: 266.67, // 3200/12
-        pixDiscount: 2880, // 10% desconto
+        installmentValue: 266.67,
+        pixDiscount: 2880,
         duration: '16 semanas',
         icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg>',
         instructors: [
@@ -22,8 +32,8 @@ const launchesData = {
         subtitle: 'Próxima turma: 05/03/2026',
         price: 3200,
         installments: 12,
-        installmentValue: 266.67, // 3200/12
-        pixDiscount: 2880, // 10% desconto
+        installmentValue: 266.67,
+        pixDiscount: 2880,
         duration: '12 semanas',
         icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
         instructors: [
@@ -33,9 +43,9 @@ const launchesData = {
     }
 };
 
-// Aguardar página carregar completamente
-window.addEventListener('load', function() {
-    console.log('Página carregada, configurando lançamentos...');
+// Aguardar DOM carregar
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM carregado, configurando lançamentos...');
     
     // Elementos do DOM
     const launchModal = document.getElementById('launchModal');
@@ -53,7 +63,13 @@ window.addEventListener('load', function() {
             console.log('Botão clicado!');
             
             const trainingType = this.getAttribute('data-training');
+            console.log('Training type:', trainingType);
             const launchData = launchesData[trainingType];
+            
+            if (!launchData) {
+                console.error('Dados do treinamento não encontrados:', trainingType);
+                return;
+            }
             
             // Preencher dados do modal
             document.getElementById('launchTitle').textContent = launchData.title;
@@ -71,19 +87,19 @@ window.addEventListener('load', function() {
                 <div class="pricing-highlight">
                     <div class="price-option">
                         <span class="price-label">PIX à vista</span>
-                        <span class="price-value pix-price" style="min-width: 120px; display: inline-block;">R$ ${launchData.pixDiscount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>
+                        <span class="price-value pix-price">R$ ${launchData.pixDiscount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>
                         <span class="price-detail">(10% desconto)</span>
                     </div>
                     <div class="price-option">
                         <span class="price-label">Cartão</span>
-                        <span class="price-value card-price" style="min-width: 120px; display: inline-block;">R$ ${launchData.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>
+                        <span class="price-value card-price">R$ ${launchData.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>
                         <span class="price-detail">em até 12x</span>
                     </div>
                 </div>
             `;
             
             // Atualizar opções de pagamento
-            document.getElementById('pixDiscount').textContent = `R$ ${launchData.pixDiscount.toFixed(2).replace('.', ',')} (10% desc.)`;
+            document.getElementById('pixDiscount').textContent = `R$ ${launchData.pixDiscount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} (10% desc.)`;
             document.getElementById('cardInstallments').textContent = `R$ ${launchData.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} em até ${launchData.installments}x`;
             
             // Armazenar tipo de treinamento
@@ -97,7 +113,7 @@ window.addEventListener('load', function() {
         });
     });
     
-    // Processar formulário de inscrição (ÚNICO PASSO)
+    // Processar formulário de inscrição
     if (launchForm) {
         launchForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -114,63 +130,29 @@ window.addEventListener('load', function() {
             const motivacao = document.getElementById('motivacao').value;
             const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
             
-            const userData = { nome, email, whatsapp, cpf, motivacao };
-            
             // Fechar modal
             launchModal.style.display = 'none';
             document.body.style.overflow = 'auto';
             launchForm.reset();
             
-            if (pagamento === 'pix' || pagamento === 'cartao') {
-                // Redirecionar para link de pagamento do Mercado Pago
+            if (pagamento === 'pix') {
+                // PIX: Redirecionar para página de confirmação (fluxo original)
+                const userDataEncoded = encodeURIComponent(JSON.stringify({
+                    nome, email, whatsapp, cpf, motivacao
+                }));
+                window.location.href = `confirmacao-pix.html?training=${trainingType}&data=${userDataEncoded}`;
+                
+            } else if (pagamento === 'cartao') {
+                // CARTÃO: Redirecionar para Mercado Pago
                 const paymentLink = PAYMENT_LINKS[trainingType]?.link;
                 
-                if (paymentLink && !paymentLink.includes('SEU_LINK')) {
-                    // Link configurado - redirecionar para Mercado Pago
+                if (paymentLink) {
+                    console.log('Redirecionando para Mercado Pago:', paymentLink);
                     window.open(paymentLink, '_blank');
                 } else {
-                    // Link não configurado - fallback para WhatsApp
-                    const preco = pagamento === 'pix' ? launchData.pixDiscount : launchData.price;
-                    const descricaoPagamento = pagamento === 'pix' ? 'PIX à vista (10% desconto)' : 'Cartão de crédito (parcelamento disponível)';
-                    
-                    const mensagem = `🎯 *INSCRIÇÃO - ${pagamento.toUpperCase()}*
-
-*TREINAMENTO:* ${launchData.title}
-*VALOR:* R$ ${preco.toFixed(2).replace('.', ',')}
-*PAGAMENTO:* ${descricaoPagamento}
-
-*DADOS:*
-👤 ${nome}
-📧 ${email}
-📱 ${whatsapp}
-🆔 ${cpf}
-
-${motivacao ? `*MOTIVAÇÃO:* ${motivacao}\n\n` : ''}Gostaria de finalizar minha inscrição!`;
-
-                    const whatsappUrl = `https://wa.me/5519991309355?text=${encodeURIComponent(mensagem)}`;
-                    window.open(whatsappUrl, '_blank');
+                    console.error('Link de pagamento não encontrado para:', trainingType);
+                    alert('Erro: Link de pagamento não configurado. Entre em contato conosco.');
                 }
-            }
-📧 E-mail: ${email}
-📱 WhatsApp: ${whatsapp}
-🆔 CPF: ${cpf}
-
-*PAGAMENTO ESCOLHIDO:*
-💳 ${formaPagamento}
-💰 Taxa de parcelamento repassada para o cliente via Mercado Pago
-
-${motivacao ? `*MOTIVAÇÃO:*\n${motivacao}\n\n` : ''}*PRÓXIMOS PASSOS:*
-✅ Inscrição realizada com sucesso
-💳 Aguardando link do Mercado Pago para pagamento
-📚 Material será enviado após confirmação
-
-Obrigado pela confiança! 🚀`;
-
-                // Redirecionar para WhatsApp
-                const whatsappUrl = `https://wa.me/5519991309355?text=${encodeURIComponent(mensagem)}`;
-                window.open(whatsappUrl, '_blank');
-                
-                alert('Inscrição realizada com sucesso! Você será redirecionado para o WhatsApp para receber o link de pagamento do Mercado Pago.');
             }
         });
     }
@@ -200,11 +182,11 @@ Obrigado pela confiança! 🚀`;
     
     // Fechar modal
     document.querySelector('.close-launch-modal')?.addEventListener('click', function() {
-        launchModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        if (launchModal) {
+            launchModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     });
-    
-    // Pagamento simplificado - sem JavaScript adicional necessário
     
     // Fechar ao clicar fora
     window.addEventListener('click', function(e) {
@@ -216,5 +198,3 @@ Obrigado pela confiança! 🚀`;
     
     console.log('Lançamentos configurados com sucesso!');
 });
-
-

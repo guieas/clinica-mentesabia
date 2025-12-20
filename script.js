@@ -243,10 +243,12 @@ const openCheckoutBtn = document.getElementById('openCheckout');
 const closeModal = document.querySelector('.close-modal');
 
 // Abrir modal
-openCheckoutBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-});
+if (openCheckoutBtn) {
+    openCheckoutBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+}
 
 // Fechar modal
 closeModal.addEventListener('click', () => {
@@ -351,66 +353,6 @@ window.addEventListener('load', function() {
         icon: '🍎'
     }
 };
-
-    // Abrir modal de interesse
-    const launchButtons = document.querySelectorAll('.btn-launch-interest');
-    
-    if (launchButtons.length === 0) {
-        console.error('Nenhum botão .btn-launch-interest encontrado');
-    }
-    
-    launchButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Botão clicado! Abrindo modal...');
-            
-            const trainingType = this.getAttribute('data-training');
-            const launchData = launchesData[trainingType];
-            
-            if (modalLaunchTitle && modalLaunchSubtitle && launchInterestModal) {
-                modalLaunchTitle.textContent = `${launchData.title}`;
-                modalLaunchSubtitle.textContent = launchData.subtitle;
-                
-                // Armazenar o tipo de treinamento no formulário
-                if (launchInterestForm) {
-                    launchInterestForm.setAttribute('data-training', trainingType);
-                }
-                
-                launchInterestModal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            } else {
-                alert('Erro: Elementos do modal não encontrados');
-            }
-        });
-    });
-
-// Fechar modal de interesse
-if (closeLaunchModal) {
-    closeLaunchModal.addEventListener('click', () => {
-        launchInterestModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    });
-}
-
-// Fechar modal de checkout
-if (closeCheckoutModal) {
-    closeCheckoutModal.addEventListener('click', () => {
-        launchCheckoutModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    });
-}
-
-// Fechar ao clicar fora dos modais
-window.addEventListener('click', (e) => {
-    if (e.target === launchInterestModal) {
-        launchInterestModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-    if (e.target === launchCheckoutModal) {
-        launchCheckoutModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
 
     // Máscara para WhatsApp no formulário de interesse
     const interesseWhatsapp = document.getElementById('interesseWhatsapp');

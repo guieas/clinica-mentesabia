@@ -121,23 +121,36 @@ window.addEventListener('load', function() {
             document.body.style.overflow = 'auto';
             launchForm.reset();
             
-            if (pagamento === 'pix') {
-                // PIX: Redirecionar para página de confirmação
-                const userDataEncoded = encodeURIComponent(JSON.stringify(userData));
-                window.location.href = `confirmacao-pix.html?training=${trainingType}&data=${userDataEncoded}`;
-            } else {
-                // CARTÃO: Fluxo via WhatsApp (Mercado Pago)
-                const preco = launchData.price;
-                const formaPagamento = `Cartão de Crédito - R$ ${preco.toFixed(2).replace('.', ',')} (parcelamento em até 12x)`;
+            if (pagamento === 'pix' || pagamento === 'cartao') {
+                // Redirecionar para link de pagamento do Mercado Pago
+                const paymentLink = PAYMENT_LINKS[trainingType]?.link;
                 
-                const mensagem = `🎯 *INSCRIÇÃO CONFIRMADA - CARTÃO*
+                if (paymentLink && !paymentLink.includes('SEU_LINK')) {
+                    // Link configurado - redirecionar para Mercado Pago
+                    window.open(paymentLink, '_blank');
+                } else {
+                    // Link não configurado - fallback para WhatsApp
+                    const preco = pagamento === 'pix' ? launchData.pixDiscount : launchData.price;
+                    const descricaoPagamento = pagamento === 'pix' ? 'PIX à vista (10% desconto)' : 'Cartão de crédito (parcelamento disponível)';
+                    
+                    const mensagem = `🎯 *INSCRIÇÃO - ${pagamento.toUpperCase()}*
 
 *TREINAMENTO:* ${launchData.title}
-*TURMA:* ${launchData.subtitle}
-*DURAÇÃO:* ${launchData.duration}
+*VALOR:* R$ ${preco.toFixed(2).replace('.', ',')}
+*PAGAMENTO:* ${descricaoPagamento}
 
-*DADOS DO PARTICIPANTE:*
-👤 Nome: ${nome}
+*DADOS:*
+👤 ${nome}
+📧 ${email}
+📱 ${whatsapp}
+🆔 ${cpf}
+
+${motivacao ? `*MOTIVAÇÃO:* ${motivacao}\n\n` : ''}Gostaria de finalizar minha inscrição!`;
+
+                    const whatsappUrl = `https://wa.me/5519991309355?text=${encodeURIComponent(mensagem)}`;
+                    window.open(whatsappUrl, '_blank');
+                }
+            }
 📧 E-mail: ${email}
 📱 WhatsApp: ${whatsapp}
 🆔 CPF: ${cpf}
@@ -203,4 +216,5 @@ Obrigado pela confiança! 🚀`;
     
     console.log('Lançamentos configurados com sucesso!');
 });
+
 

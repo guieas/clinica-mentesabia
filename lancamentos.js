@@ -15,7 +15,7 @@ const PAYMENT_LINKS = {
 const launchesData = {
     dbt: {
         title: 'Treinamento de Habilidades em DBT',
-        subtitle: 'Próxima turma: 03/03/2026',
+        subtitle: 'Próxima turma: 04/08/2025',
         price: 3200,
         installments: 12,
         installmentValue: 266.67,
@@ -29,7 +29,7 @@ const launchesData = {
     },
     eating: {
         title: 'Programa para o Comer Emocional e Compulsivo',
-        subtitle: 'Próxima turma: 05/03/2026',
+        subtitle: 'Próxima turma: 06/08/2025',
         price: 3200,
         installments: 12,
         installmentValue: 266.67,

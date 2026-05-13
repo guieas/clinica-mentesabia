@@ -332,7 +332,7 @@ window.addEventListener('load', function() {
     const launchesData = {
     dbt: {
         title: 'Treinamento de Habilidades em DBT',
-        subtitle: 'Próxima turma: 03/03/2026',
+        subtitle: 'Próxima turma: 04/08/2025',
         price: 497,
         installments: 3,
         installmentValue: 165.67,
@@ -343,7 +343,7 @@ window.addEventListener('load', function() {
     },
     eating: {
         title: 'Programa para o Comer Emocional e Compulsivo',
-        subtitle: 'Próxima turma: 05/03/2026',
+        subtitle: 'Próxima turma: 06/08/2025',
         price: 397,
         installments: 3,
         installmentValue: 132.33,

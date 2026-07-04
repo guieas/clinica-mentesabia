@@ -29,7 +29,7 @@ const launchesData = {
     },
     eating: {
         title: 'Programa para o Comer Emocional e Compulsivo',
-        subtitle: 'Próxima turma: 06/08/2025',
+        subtitle: 'Próxima turma: Setembro/2026',
         price: 3200,
         installments: 12,
         installmentValue: 266.67,

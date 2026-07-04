@@ -59,7 +59,6 @@ const launchesData = {
         ]
     }
 };
-};
 
 // Aguardar DOM carregar
 document.addEventListener('DOMContentLoaded', function() {

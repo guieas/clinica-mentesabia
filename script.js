@@ -328,31 +328,7 @@ Aguardo instruções para pagamento!
 // Código dos Lançamentos - Executar após carregamento da página
 window.addEventListener('load', function() {
     
-    // Dados dos lançamentos
-    const launchesData = {
-    dbt: {
-        title: 'Treinamento de Habilidades em DBT',
-        subtitle: 'Próxima turma: 04/08/2025',
-        price: 497,
-        installments: 3,
-        installmentValue: 165.67,
-        pixDiscount: 447, // 10% desconto
-        duration: '8 semanas',
-        maxParticipants: 12,
-        icon: '🧠'
-    },
-    eating: {
-        title: 'Programa para o Comer Emocional e Compulsivo',
-        subtitle: 'Próxima turma: Setembro/2026',
-        price: 397,
-        installments: 3,
-        installmentValue: 132.33,
-        pixDiscount: 357, // 10% desconto
-        duration: '6 semanas',
-        maxParticipants: 10,
-        icon: '🍎'
-    }
-};
+    // Dados dos lançamentos (dados reais estão no lancamentos.js)
 
     // Máscara para WhatsApp no formulário de interesse
     const interesseWhatsapp = document.getElementById('interesseWhatsapp');

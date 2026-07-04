@@ -10,7 +10,7 @@ const PAYMENT_LINKS = {
         link: 'https://mpago.la/316ii7v'  // Comer Emocional e Compulsivo
     },
     'dbt-teens': {
-        link: ''  // DBT Adolescentes - SUBSTITUIR PELO LINK DO MERCADO PAGO
+        link: 'https://mpago.la/1KVsdmw'  // DBT Adolescentes
     }
 };
 

@@ -470,12 +470,12 @@
             <div class="pricing-comparison">
                 <div class="price-option pix-selected">
                     <div class="price-label">PIX à vista (10% desconto)</div>
-                    <div class="price-value">R$ 2.880,00</div>
+                    <div class="price-value" id="pixPriceDisplay">R$ 2.880,00</div>
                 </div>
                 <div class="price-option card-option">
                     <div class="price-label">Cartão (até 12x)</div>
-                    <div class="price-value">R$ 3.200,00</div>
-                    <div class="price-installment">12x de R$ 266,67</div>
+                    <div class="price-value" id="cardPriceDisplay">R$ 3.200,00</div>
+                    <div class="price-installment" id="cardInstallmentDisplay">12x de R$ 266,67</div>
                 </div>
             </div>
 
@@ -541,6 +541,8 @@
                 subtitle: 'Próxima turma: 04/08/2025',
                 duration: '16 semanas',
                 pixAmount: 'R$ 2.880,00',
+                cardAmount: 'R$ 3.200,00',
+                installment: '12x de R$ 266,67',
                 instructors: [
                     { name: 'Gabriela Bueno', credential: 'CRP: 06/179325', role: 'Psicóloga' },
                     { name: 'Giovanna Schiavinato', credential: 'CRP: 06/154598', role: 'Psicóloga' }
@@ -551,6 +553,8 @@
                 subtitle: 'Próxima turma: Setembro/2026',
                 duration: '12 semanas',
                 pixAmount: 'R$ 2.880,00',
+                cardAmount: 'R$ 3.200,00',
+                installment: '12x de R$ 266,67',
                 instructors: [
                     { name: 'César Moraes', credential: 'CRN: 43703', role: 'Nutricionista' },
                     { name: 'Renata Mociaro', credential: 'CRP: 06/121565', role: 'Psicóloga' }
@@ -561,6 +565,8 @@
                 subtitle: 'Próxima turma: 20/08/2026',
                 duration: '24 semanas',
                 pixAmount: 'R$ 3.240,00',
+                cardAmount: 'R$ 3.600,00',
+                installment: '12x de R$ 300,00',
                 instructors: [
                     { name: 'Ruth Passos', credential: 'CRP: 06/161903', role: 'Psicóloga' },
                     { name: 'Laura Loro', credential: 'CRP: 06/204541', role: 'Psicóloga' }
@@ -607,6 +613,17 @@
             `;
             
             document.getElementById('pixAmount').textContent = training.pixAmount;
+            
+            // Atualizar comparação de preços
+            if (document.getElementById('pixPriceDisplay')) {
+                document.getElementById('pixPriceDisplay').textContent = training.pixAmount;
+            }
+            if (document.getElementById('cardPriceDisplay')) {
+                document.getElementById('cardPriceDisplay').textContent = training.cardAmount;
+            }
+            if (document.getElementById('cardInstallmentDisplay')) {
+                document.getElementById('cardInstallmentDisplay').textContent = training.installment;
+            }
         }
         
         // Função para copiar chave PIX

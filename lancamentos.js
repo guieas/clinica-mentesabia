@@ -8,6 +8,9 @@ const PAYMENT_LINKS = {
     },
     eating: {
         link: 'https://mpago.la/316ii7v'  // Comer Emocional e Compulsivo
+    },
+    'dbt-teens': {
+        link: ''  // DBT Adolescentes - SUBSTITUIR PELO LINK DO MERCADO PAGO
     }
 };
 
@@ -40,7 +43,22 @@ const launchesData = {
             { name: 'César Moraes', credential: 'CRN: 43703', role: 'Nutricionista' },
             { name: 'Renata Mociaro', credential: 'CRP: 06/121565', role: 'Psicóloga' }
         ]
+    },
+    'dbt-teens': {
+        title: 'Treinamento de Habilidades DBT para Adolescentes',
+        subtitle: 'Próxima turma: 20/08/2026',
+        price: 3600,
+        installments: 12,
+        installmentValue: 300.00,
+        pixDiscount: 3240,
+        duration: '24 semanas',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"></circle><path d="M3 21v-2a7 7 0 0 1 14 0v2"></path></svg>',
+        instructors: [
+            { name: 'Ruth Passos', credential: 'CRP: 06/161903', role: 'Psicóloga' },
+            { name: 'Laura Loro', credential: 'CRP: 06/204541', role: 'Psicóloga' }
+        ]
     }
+};
 };
 
 // Aguardar DOM carregar
